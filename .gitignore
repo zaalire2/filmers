@@ -149,7 +149,11 @@ dmypy.json
 .pyre/
 
 # pytype static type analyzer
-.pytype/
+.pytype
+filmers/pyvenv.cfg
+filmers/bin
+
+
 
 # Cython debug symbols
 cython_debug/
