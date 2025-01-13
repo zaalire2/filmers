@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path , include
 from accounts import urls as userUrls
 from films import urls as filmUrls
+from . import views
 
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('api/user/' , include(userUrls)),
     path('api/films/' , include(filmUrls)),

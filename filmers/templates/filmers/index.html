@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'filmers/index.css' %}">
+    <title>Filmers | Main Page</title>
+</head>
+<!-- <body onbeforeunload="resetcookie()"> -->
+    <body>
+    <header id="main-header">
+        <nav id="left-header-nav">
+            <span>Filmers</span>
+        </nav>
+
+        <nav id="right-header-nav">
+            <span> some lists </span>
+        </nav>
+    </header>
+    
+
+
+    <nav id="left-nav">
+        <div id="icons-container">
+            <!-- linka moshkel daran beineshoon fazaye khali nadare -->
+          <a href="#"> <img src="{% static 'filmers/pictures/game.png' %}" class="icon" alt=""></a> 
+          <a href="#">  <img src="{% static 'filmers/pictures/game.png' %}" class="icon" alt=""></a> 
+          <a href="#">  <img src="{% static 'filmers/pictures/game.png' %}" class="icon" alt=""></a> 
+          <a href="#">  <img src="{% static 'filmers/pictures/game.png' %}" class="icon" alt=""></a> 
+          <a href="#">  <img src="{% static 'filmers/pictures/game.png' %}" id="icon-with-margin" alt=""></a> 
+            <hr>
+          <a href="#">  <img src="{% static 'filmers/pictures/game.png' %}" class="icon" alt=""></a> 
+          <a href="#">  <img src="{% static 'filmers/pictures/game.png' %}" class="icon" alt=""></a> 
+            <!-- linka moshkel daran beineshoon fazaye khali nadare -->
+        </div>
+    </nav>
+
+
+        <!-- big image start -->
+        <div id="big-img-container">
+            <form action="" id="search" name="form1" onsubmit="return required()">
+                <input type="search" name="text1" onClick="this.setSelectionRange(0, this.value.length)" placeholder="Search movies,tv shows..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search movies,tv shows...'" id="search-type">
+                <input type="submit" name="submit" id="search-button" value="" >
+            </form>
+                         
+                    
+            <img src="{% static 'filmers/pictures/daenerys.png' %}" id="big-img"  alt="">    
+            <div id="big-img-info-box" >     
+                <div id="big-img-title-container">
+                    <h1 id="big-img-title">Game Of Thrones</h1>
+                    <div id="big-img-short-info">
+                        <span>TV-MA</span>
+                        <span>Action,Adventure,Drama</span>
+                        <span>9.4/10</span>
+                    </div>
+                </div>
+                <div id="big-img-text" class="gray-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sequi odio commodi exercitationem iusto voluptatum, voluptatibus adipisci optio, quibusdam quaerat corrupti pariatur non ut atque beatae dolores aut explicabo, veritatis temporibus aperiam cumque! Non, quos?</div>
+                <div id="big-img-links">
+                    <a id="big-img-learn-more" href="#">
+                        <div>
+                            learn more
+                        </div>
+                    </a>
+                    <a id="big-img-play-trailer" href="#">
+                        <div>
+                            <img src="{% static 'filmers/pictures/play.png' %}"  alt="">
+                            Play Trailer
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- big image end -->
+
+        <div id="results-container">
+            <!-- ye doone az ina ro bezar too for chand ta khasti bezan -->
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+            <!-- ye doone az ina ro bezar too for har chand ta khasti bezan -->
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+
+            <a class="row-item" href="#" >
+                <img src="{% static 'filmers/pictures/daenerys-2.jpg' %}" alt="" class="row-img">
+                <h2>Game of Thrones</h2>
+                <div class="short-info gray-font">
+                    <span>Action,Adventure,Drama</span>
+                    <span>9.4/10</span>
+                </div>
+            </a>
+        </div>
+
+
+
+<script>
+       function required(){
+            var empt = document.forms["form1"]["text1"].value;
+            if (empt == ""){
+                var elem1 = document.getElementById("big-img");
+                var elem2 = document.getElementById("big-img-info-box");
+                var elem3 = document.getElementById("results-container");
+                
+                elem1.style.display="inline";
+                elem2.style.display="flex";
+                elem3.style.display="none";
+        
+                var elem = document.getElementById("search");
+                elem.style.top="80%";
+                alert("Please input a Value");
+                return false;
+            }
+            else{
+                var elem1 = document.getElementById("big-img");
+                var elem2 = document.getElementById("big-img-info-box");
+                var elem3 = document.getElementById("results-container");
+
+                    elem1.style.display="none";
+                    elem2.style.display="none";
+                    elem3.style.display="flex";
+    
+                var elem = document.getElementById("search");
+                elem.style.top="2rem";
+                return false; 
+            }
+        }
+
+     
+</script>
+</body>
+</html>
+
+
+
+<!-- image ha alt nadaran -->
