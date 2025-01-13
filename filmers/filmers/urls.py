@@ -18,12 +18,22 @@ from django.contrib import admin
 from django.urls import path , include
 from accounts import urls as userUrls
 from films import urls as filmUrls
+from accounts.views import LoginView, SignupView, ForgotPasswordView
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
+    # API endpoints
     path('api/user/' , include(userUrls)),
     path('api/films/' , include(filmUrls)),
-]
+    # Auth views
+    path('login/', LoginView.as_view(), name='login'),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('password-reset/', ForgotPasswordView.as_view(), name='password_reset'),
+    # Other template views
+    path('accounts/', include('accounts.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -40,7 +40,7 @@
 
         <!-- big image start -->
         <div id="big-img-container">
-            <form action="" id="search" name="form1" onsubmit="return required()">
+            <form action="" id="search" name="form1" onsubmit="return handleSearch(event)">
                 <input type="search" name="text1" onClick="this.setSelectionRange(0, this.value.length)" placeholder="Search movies,tv shows..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search movies,tv shows...'" id="search-type">
                 <input type="submit" name="submit" id="search-button" value="" >
             </form>
@@ -143,38 +143,87 @@
 
 
 <script>
-       function required(){
-            var empt = document.forms["form1"]["text1"].value;
-            if (empt == ""){
-                var elem1 = document.getElementById("big-img");
-                var elem2 = document.getElementById("big-img-info-box");
-                var elem3 = document.getElementById("results-container");
-                
-                elem1.style.display="inline";
-                elem2.style.display="flex";
-                elem3.style.display="none";
+    async function handleSearch(event) {
+        event.preventDefault();
+        var searchInput = document.forms["form1"]["text1"].value;
         
-                var elem = document.getElementById("search");
-                elem.style.top="80%";
-                alert("Please input a Value");
-                return false;
-            }
-            else{
-                var elem1 = document.getElementById("big-img");
-                var elem2 = document.getElementById("big-img-info-box");
-                var elem3 = document.getElementById("results-container");
-
-                    elem1.style.display="none";
-                    elem2.style.display="none";
-                    elem3.style.display="flex";
+        if (searchInput == "") {
+            var elem1 = document.getElementById("big-img");
+            var elem2 = document.getElementById("big-img-info-box");
+            var elem3 = document.getElementById("results-container");
+            
+            elem1.style.display = "inline";
+            elem2.style.display = "flex";
+            elem3.style.display = "none";
     
-                var elem = document.getElementById("search");
-                elem.style.top="2rem";
-                return false; 
-            }
+            var elem = document.getElementById("search");
+            elem.style.top = "80%";
+            alert("Please input a Value");
+            return false;
         }
 
-     
+        try {
+            const response = await fetch(`/api/films/films/?search=${encodeURIComponent(searchInput)}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    // Handle unauthorized - redirect to login
+                    window.location.href = '/login/';
+                    return false;
+                }
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            displaySearchResults(data);
+
+            var elem1 = document.getElementById("big-img");
+            var elem2 = document.getElementById("big-img-info-box");
+            var elem3 = document.getElementById("results-container");
+
+            elem1.style.display = "none";
+            elem2.style.display = "none";
+            elem3.style.display = "flex";
+
+            var elem = document.getElementById("search");
+            elem.style.top = "2rem";
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error searching films. Please try again.');
+        }
+        return false;
+    }
+
+    function displaySearchResults(films) {
+        const resultsContainer = document.getElementById('results-container');
+        resultsContainer.innerHTML = ''; // Clear existing results
+
+        films.forEach(film => {
+            const filmElement = document.createElement('a');
+            filmElement.className = 'row-item';
+            filmElement.href = '#';
+
+            filmElement.innerHTML = `
+                <img src="${film.image || '{% static "filmers/pictures/daenerys-2.jpg" %}'}" alt="${film.title}" class="row-img">
+                <h2>${film.title}</h2>
+                <div class="short-info gray-font">
+                    <span>${film.genre}</span>
+                    <span>${film.rating}/10</span>
+                </div>
+            `;
+
+            resultsContainer.appendChild(filmElement);
+        });
+
+        if (films.length === 0) {
+            resultsContainer.innerHTML = '<p>No results found</p>';
+        }
+    }
 </script>
 </body>
 </html>
