@@ -15,25 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path , include
-from accounts import urls as userUrls
-from films import urls as filmUrls
-from accounts.views import LoginView, SignupView, ForgotPasswordView
-from . import views
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.views.static import serve
+from .views import index
 
 urlpatterns = [
-    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
-    # API endpoints
-    path('api/user/' , include(userUrls)),
-    path('api/films/' , include(filmUrls)),
-    # Auth views
-    path('login/', LoginView.as_view(), name='login'),
-    path('signup/', SignupView.as_view(), name='signup'),
-    path('password-reset/', ForgotPasswordView.as_view(), name='password_reset'),
-    # Other template views
-    path('accounts/', include('accounts.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('api/', include('api.urls')),  # API endpoints
+    # Explicitly serve media files
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+        'show_indexes': True
+    }),
+    # Handle all frontend routes last
+    re_path(r'^.*$', index, name='index'),
+]
+
+# Add static and media file serving for development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

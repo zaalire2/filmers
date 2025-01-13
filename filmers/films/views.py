@@ -14,11 +14,15 @@ class FilmListAPIView(generics.ListAPIView):
         search_query = self.request.query_params.get('search', None)
         if search_query:
             queryset = queryset.filter(
-                Q(title__icontains=search_query) |
-                Q(description__icontains=search_query) |
+                Q(name__icontains=search_query) |
                 Q(genre__icontains=search_query)
             )
         return queryset
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 
 class ReviewCreateAPIView(generics.CreateAPIView):

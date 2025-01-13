@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from django.views.decorators.cache import never_cache
 
-@login_required
-def index(request):
-    return render(request, 'filmers/index.html') 
+# Serve the frontend
+index = never_cache(TemplateView.as_view(template_name='index.html')) 

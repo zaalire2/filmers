@@ -4,6 +4,7 @@ class Film(models.Model):
     name = models.CharField(max_length=100)
     genre = models.CharField(max_length=50)
     release_year = models.IntegerField()
+    image = models.ImageField(upload_to='films/', null=True, blank=True)
 
     def __str__(self):
         return self.name
